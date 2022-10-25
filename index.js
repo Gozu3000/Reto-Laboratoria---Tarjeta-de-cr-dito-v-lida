@@ -50,7 +50,7 @@
 
         resutado.style.display='block'
 
-        sumaTotal % 10 === 0 ?
+        sumaTotal % 10 === 0 &&  h3.textContent.length ===19 ?
         (
             resutado.textContent = 'Tarjeta válida',
             div_sharp.style.display = 'block',
