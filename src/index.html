@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="../normalize.css">
+    <script src="https://kit.fontawesome.com/5874972c55.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1 id="h1">Tarjeta de crédito válida</h1>
+    <h3 class="slogan">Conozca si el número de su tarjeta es válido</h3>
+    <div class="tarjeta-container">
+        <div class="container_figure_bank">
+            <figure>
+                <img src="./images/chip-sinfondo.png" alt="imagen">
+            </figure>            
+            <h2>101 BANK</h2>
+        </div>
+        <h3 id="h3"></H3>
+        <p>Expirty Date 10/19</p>
+        <p>John Smith</p>
+    </div>
+
+    <input id="input_id" type="text" placeholder="Ingrese su número de tarjeta" autofocus
+    maxlength="19" onkeyup= capturarValue() />
+
+    <input type="button" value="Validar" onclick= validar() />
+    <h2 id="resutado">  </h2>
+    <div id="div_sharp">
+        <i class="fa-sharp fa-solid fa-circle-check sharp"></i>
+    </div>
+    <div id="div_circle">
+        <i class="fa-solid fa-circle-xmark circle"></i>
+    </div>
+
+</body>
+<script>
+
+
+    const h3 = document.querySelector('#h3')
+    const input_id = document.querySelector('#input_id')
+    const resutado = document.querySelector('#resutado')
+    const div_sharp = document.querySelector('#div_sharp')
+    const div_circle = document.querySelector('#div_circle')
+
+    h3.textContent = '4563 3434 5768 9753'
+    
+
+    let value
+
+    input_id.addEventListener('input',(e)=>{
+        value = e.target.value
+        value = value.replace(/\s/g, '')
+                     .replace(/\D/g, '')
+                     .replace(/([0-9]{4})/g, '$1 ')
+                     .trim();
+        
+        input_id.value = value
+    })
+
+    function capturarValue (){
+        h3.textContent = value || '4563 3434 5768 9753'
+    }
+    
+    if(input_id.value.length > 16) value = value.slice(0,16)
+
+
+    function validar(){
+        let parametro = value
+        parametro = parametro.replace(/\s/g, '','')
+        let arrayParametro = parametro.split('')
+        let sumaTotal = 0
+        
+        for (let i = 0; i < arrayParametro.length; i++) {
+            if(i%2 === 0) {
+                sumaParcial = arrayParametro[i]*2
+                if(sumaParcial >= 10) {                
+                    let array = String(sumaParcial).split('')
+                    sumaParcial = Number(array[0])+Number(array[1])
+                }
+                sumaTotal += sumaParcial
+            }
+
+            if(i%2 !== 0){
+                sumaTotal += arrayParametro[i]*1
+            }
+        }
+
+        resutado.style.display='block'
+
+        sumaTotal % 10 === 0 ?
+        (
+            resutado.textContent = 'Tarjeta válida',
+            div_sharp.style.display = 'block',
+            div_circle.style.display = 'none'
+        )
+            : 
+        (
+            resutado.textContent = 'Tarjeta inválida',
+            div_circle.style.display = 'block',
+            div_sharp.style.display = 'none'
+        )
+    }
+
+    input_id.addEventListener('focus',()=>{
+        resutado.style.display='none'
+        div_sharp.style.display = 'none'
+        div_circle.style.display = 'none'
+    })
+
+
+</script>
+</html>
