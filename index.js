@@ -4,7 +4,7 @@
     const div_sharp = document.querySelector('#div_sharp')
     const div_circle = document.querySelector('#div_circle')
 
-
+    h3.textContent = '4563 3434 5768 9753'
     let value
 
     input_id.addEventListener('input',(e)=>{
