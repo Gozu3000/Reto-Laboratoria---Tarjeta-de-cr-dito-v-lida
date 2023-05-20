@@ -1,11 +1,9 @@
-
     const h3 = document.querySelector('#h3')
     const input_id = document.querySelector('#input_id')
     const resutado = document.querySelector('#resutado')
     const div_sharp = document.querySelector('#div_sharp')
     const div_circle = document.querySelector('#div_circle')
 
-    h3.textContent = '4563 3434 5768 9753'
     
 
     let value
@@ -21,13 +19,26 @@
     })
 
     function capturarValue (){
-        h3.textContent = value || '4563 3434 5768 9753'
+        // h3.textContent = value || '4563 3434 5768 9753'
+        if(value){
+            if (value.length < 15) {
+                h3.textContent = value.replace(/\d/g, '*')
+            }
+            return h3.textContent = value.slice(0,14).replace(/\d/g, '*') + value.slice(15)
+        }
+        else{
+            h3.textContent = '4563 3434 5768 9753'
+        }
     }
     
     if(input_id.value.length > 16) value = value.slice(0,16)
 
 
     function validar(){
+        if(input_id.value === ""){
+            resutado.style.display = "block"
+            resutado.textContent = 'Campo no puede estar vacío'
+        }
         let parametro = value
         parametro = parametro.replace(/\s/g, '','')
         let arrayParametro = parametro.split('')
@@ -50,7 +61,7 @@
 
         resutado.style.display='block'
 
-        sumaTotal % 10 === 0 &&  h3.textContent.length ===19 ?
+        sumaTotal % 10 === 0 &&  value.length === 19 ?
         (
             resutado.textContent = 'Tarjeta válida',
             div_sharp.style.display = 'block',
