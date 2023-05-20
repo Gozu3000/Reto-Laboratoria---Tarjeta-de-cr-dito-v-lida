@@ -4,7 +4,6 @@
     const div_sharp = document.querySelector('#div_sharp')
     const div_circle = document.querySelector('#div_circle')
 
-    
 
     let value
 
@@ -24,7 +23,7 @@
             if (value.length < 15) {
                 h3.textContent = value.replace(/\d/g, '*')
             }
-            return h3.textContent = value.slice(0,14).replace(/\d/g, '*') + value.slice(15)
+            return h3.textContent = value.slice(0,14).replace(/\d/g, '*') + " " + value.slice(15)
         }
         else{
             h3.textContent = '4563 3434 5768 9753'
